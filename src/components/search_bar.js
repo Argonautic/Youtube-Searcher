@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-
-/*
-Functional version of SearchBar
-
-const SearchBar = () => {
-    return <input />;
-};
-*/
-
-//Class-Based version of SearchBar
 class SearchBar extends Component {
 
     constructor(props) {
@@ -21,14 +11,18 @@ class SearchBar extends Component {
     render() {
         //this.state .term = event.target.value THIS IS BAD DON'T DIRECTLY SET STATE OUTSIDE OF CONSTRUCTORS
         return (
-            <div>
+            <div className="search-bar">
                 <input
                     value={this.state.term}
-                    onChange={event => this.setState({term: event.target.value})} />
+                    onChange={(event) => this.onInputChange(event.target.value)} />
             </div>
         );
     }
 
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearchTermChange(term);
+    }
 }
 
 export default SearchBar;
